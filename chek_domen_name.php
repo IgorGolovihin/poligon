@@ -1,7 +1,4 @@
 <?php
-/*
-* if txt file long. add (.htacces) php_value max_execution_time 300  
-*/
 
 ini_set("auto_detect_line_endings", true);
 require_once __DIR__ . '\src\CurlVerificationDomen.php';
@@ -13,7 +10,7 @@ $clearArrayUrl = array_filter($arrayMixUrl, function ($element) {
 	return !empty($element && strlen($element) > 2);
 });
 
-$arrayUrl = array_values($clearArrayUrl); // 0, 1, 2, 3 ... n key array
+$arrayUrl = array_values($clearArrayUrl);
 
 foreach ($arrayUrl as $val) {
 
@@ -24,12 +21,11 @@ foreach ($arrayUrl as $val) {
 		echo '<p style="color:green"> Сайт '  . $val . ' доступен. <p>';
 
 	else {
-		if ($answer == 28) //see libcurl-errors info
-		{
+		if ($answer == 28) {
 			echo '<p style="color:red">Ресурс ' . $val . ' не отвечает. Тайм-аут операции (более 10 сек)<p>';
 		} else if ($answer == 47) {
 			echo '<p style="color:red">Ресурс ' . $val . ' перенаправление редирект. Причина: ' . $answer . '<p>';
-		}else {
+		} else {
 			echo '<p style="color:red">Ресурс ' . $val . ' недоступен. Причина: ' . $answer . '<p>';
 		}
 	}
