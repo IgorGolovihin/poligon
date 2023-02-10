@@ -13,7 +13,7 @@ $clearArrayUrl = array_filter($arrayMixUrl, function ($element) {
 	return !empty($element && strlen($element) > 2);
 });
 
-$arrayUrl = array_values($clearArrayUrl);
+$arrayUrl = array_values($clearArrayUrl); // 0, 1, 2, 3 ... n key array
 
 foreach ($arrayUrl as $val) {
 
@@ -27,7 +27,9 @@ foreach ($arrayUrl as $val) {
 		if ($answer == 28) //see libcurl-errors info
 		{
 			echo '<p style="color:red">Ресурс ' . $val . ' не отвечает. Тайм-аут операции (более 10 сек)<p>';
-		} else {
+		} else if ($answer == 47) {
+			echo '<p style="color:red">Ресурс ' . $val . ' перенаправление редирект. Причина: ' . $answer . '<p>';
+		}else {
 			echo '<p style="color:red">Ресурс ' . $val . ' недоступен. Причина: ' . $answer . '<p>';
 		}
 	}
